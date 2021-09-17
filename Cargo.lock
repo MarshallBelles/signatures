@@ -151,7 +151,7 @@ checksum = "34d33b390ab82f2e1481e331dbd0530895640179d2128ef9a79cc690b78d1eba"
 dependencies = [
  "der 0.3.5",
  "elliptic-curve 0.9.12",
- "signature",
+ "signature 1.3.1 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -163,7 +163,7 @@ dependencies = [
  "hex-literal",
  "hmac",
  "sha3",
- "signature",
+ "signature 1.3.1 (git+https://github.com/MarshallBelles/traits.git)",
 ]
 
 [[package]]
@@ -176,7 +176,7 @@ dependencies = [
  "ring-compat",
  "serde",
  "serde_bytes",
- "signature",
+ "signature 1.3.1 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -185,7 +185,7 @@ version = "1.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4620d40f6d2601794401d6dd95a5cf69b6c157852539470eeda433a99b3c0efc"
 dependencies = [
- "signature",
+ "signature 1.3.1 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -541,6 +541,14 @@ name = "signature"
 version = "1.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c19772be3c4dd2ceaacf03cb41d5885f2a02c4d8804884918e3a258480803335"
+dependencies = [
+ "rand_core 0.6.3",
+]
+
+[[package]]
+name = "signature"
+version = "1.3.1"
+source = "git+https://github.com/MarshallBelles/traits.git#5db7a31dcfb243387ab353694373cdc87f34910a"
 dependencies = [
  "digest",
  "rand_core 0.6.3",

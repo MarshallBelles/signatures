@@ -16,7 +16,7 @@ keywords   = ["crypto", "ecc", "nist", "secp256k1", "signature"]
 [dependencies]
 elliptic-curve = { git = "https://github.com/MarshallBelles/traits.git", default-features = false }
 hmac = { version = "0.11", optional = true, default-features = false }
-signature = { version = ">= 1.3.1, < 1.4.0", default-features = false, features = ["rand-preview"] }
+signature = { git = "https://github.com/MarshallBelles/traits.git", package="signature", default-features = false, features = ["rand-preview"] }
 
 # optional dependencies
 der = { version = "0.4", optional = true }
