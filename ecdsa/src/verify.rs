@@ -13,7 +13,7 @@ use elliptic_curve_flow::{
     },
     AffinePoint, FieldSize, PointCompression, PrimeCurve, ProjectiveArithmetic, PublicKey, Scalar,
 };
-use signature::{digest::Digest, DigestVerifier, Verifier};
+use signature_flow::{digest::Digest, DigestVerifier, Verifier};
 
 #[cfg(feature = "pkcs8")]
 use crate::elliptic_curve_flow::{

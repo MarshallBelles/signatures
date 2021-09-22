@@ -7,7 +7,7 @@ use core::{
     ops::{Add, Range},
 };
 use der::{asn1::UIntBytes, Decodable};
-use elliptic_curve::{
+use elliptic_curve_flow::{
     bigint::Encoding as _,
     consts::U9,
     generic_array::{ArrayLength, GenericArray},
@@ -58,7 +58,7 @@ where
     s_range: Range<usize>,
 }
 
-impl<C> signature::Signature for Signature<C>
+impl<C> signature_flow::Signature for Signature<C>
 where
     C: PrimeCurve,
     MaxSize<C>: ArrayLength<u8>,
@@ -204,7 +204,7 @@ fn find_scalar_range(outer: &[u8], inner: &[u8]) -> Result<Range<usize>> {
 }
 
 #[cfg(all(feature = "digest", feature = "hazmat"))]
-impl<C> signature::PrehashSignature for Signature<C>
+impl<C> signature_flow::PrehashSignature for Signature<C>
 where
     C: PrimeCurve + crate::hazmat::DigestPrimitive,
     MaxSize<C>: ArrayLength<u8>,
@@ -215,8 +215,8 @@ where
 
 #[cfg(all(test, feature = "arithmetic"))]
 mod tests {
-    use elliptic_curve::dev::MockCurve;
-    use signature::Signature as _;
+    use elliptic_curve_flow::dev::MockCurve;
+    use signature_flow::Signature as _;
 
     type Signature = crate::Signature<MockCurve>;
 

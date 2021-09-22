@@ -4,7 +4,7 @@
 //! <https://tools.ietf.org/html/rfc6979#section-3>
 
 use crate::hazmat::FromDigest;
-use elliptic_curve::{
+use elliptic_curve_flow::{
     generic_array::GenericArray,
     group::ff::PrimeField,
     ops::Invert,
@@ -12,7 +12,7 @@ use elliptic_curve::{
     FieldBytes, FieldSize, NonZeroScalar, PrimeCurve, ProjectiveArithmetic, Scalar,
 };
 use hmac::{Hmac, Mac, NewMac};
-use signature::digest::{BlockInput, FixedOutput, Reset, Update};
+use signature_flow::digest::{BlockInput, FixedOutput, Reset, Update};
 
 /// Generate ephemeral scalar `k` from the secret scalar and a digest of the
 /// input message.
@@ -105,7 +105,7 @@ where
 #[cfg(test)]
 mod tests {
     use super::generate_k;
-    use elliptic_curve::{dev::NonZeroScalar, group::ff::PrimeField};
+    use elliptic_curve_flow::{dev::NonZeroScalar, group::ff::PrimeField};
     use hex_literal::hex;
     use sha2::{Digest, Sha256};
 

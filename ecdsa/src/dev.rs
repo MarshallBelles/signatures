@@ -1,7 +1,7 @@
 //! Development-related functionality.
 
 use crate::hazmat::FromDigest;
-use elliptic_curve::{
+use elliptic_curve_flow::{
     bigint::{ArrayEncoding, Encoding},
     consts::U32,
     dev::{MockCurve, Scalar},
@@ -9,7 +9,7 @@ use elliptic_curve::{
     subtle::{ConditionallySelectable, ConstantTimeLess},
     Curve,
 };
-use signature::digest::Digest;
+use signature_flow::digest::Digest;
 
 type UInt = <MockCurve as Curve>::UInt;
 
@@ -64,7 +64,7 @@ macro_rules! new_signing_test {
     ($curve:path, $vectors:expr) => {
         use core::convert::TryInto;
         use $crate::{
-            elliptic_curve::{
+            elliptic_curve_flow::{
                 bigint::Encoding, generic_array::GenericArray, group::ff::PrimeField, Curve,
                 ProjectiveArithmetic, Scalar,
             },
@@ -101,7 +101,7 @@ macro_rules! new_verification_test {
     ($curve:path, $vectors:expr) => {
         use core::convert::TryInto;
         use $crate::{
-            elliptic_curve::{
+            elliptic_curve_flow::{
                 generic_array::GenericArray, group::ff::PrimeField, sec1::EncodedPoint,
                 AffinePoint, ProjectiveArithmetic, Scalar,
             },
@@ -172,32 +172,32 @@ macro_rules! new_verification_test {
 #[cfg_attr(docsrs, doc(cfg(feature = "dev")))]
 macro_rules! new_wycheproof_test {
     ($name:ident, $test_name: expr, $curve:path) => {
-        use $crate::{elliptic_curve::sec1::EncodedPoint, signature::Verifier, Signature};
+        use $crate::{elliptic_curve_flow::sec1::EncodedPoint, signature_flow::Verifier, Signature};
 
         #[test]
         fn $name() {
             use blobby::Blob5Iterator;
-            use elliptic_curve::{bigint::Encoding as _, generic_array::typenum::Unsigned};
+            use elliptic_curve_flow::{bigint::Encoding as _, generic_array::typenum::Unsigned};
 
             // Build a field element but allow for too-short input (left pad with zeros)
             // or too-long input (check excess leftmost bytes are zeros).
-            fn element_from_padded_slice<C: elliptic_curve::Curve>(
+            fn element_from_padded_slice<C: elliptic_curve_flow::Curve>(
                 data: &[u8],
-            ) -> elliptic_curve::FieldBytes<C> {
+            ) -> elliptic_curve_flow::FieldBytes<C> {
                 let point_len = C::UInt::BYTE_SIZE;
                 if data.len() >= point_len {
                     let offset = data.len() - point_len;
                     for v in data.iter().take(offset) {
                         assert_eq!(*v, 0, "EcdsaVerifier: point too large");
                     }
-                    elliptic_curve::FieldBytes::<C>::clone_from_slice(&data[offset..])
+                    elliptic_curve_flow::FieldBytes::<C>::clone_from_slice(&data[offset..])
                 } else {
                     // Provided slice is too short and needs to be padded with zeros
                     // on the left.  Build a combined exact iterator to do this.
                     let iter = core::iter::repeat(0)
                         .take(point_len - data.len())
                         .chain(data.iter().cloned());
-                    elliptic_curve::FieldBytes::<C>::from_exact_iter(iter).unwrap()
+                    elliptic_curve_flow::FieldBytes::<C>::from_exact_iter(iter).unwrap()
                 }
             }
 

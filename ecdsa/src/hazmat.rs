@@ -15,18 +15,18 @@
 use {
     crate::{Result, SignatureSize},
     core::borrow::Borrow,
-    elliptic_curve::{ops::Invert, ProjectiveArithmetic, Scalar},
+    elliptic_curve_flow::{ops::Invert, ProjectiveArithmetic, Scalar},
 };
 
 #[cfg(feature = "digest")]
 use {
-    crate::signature::{digest::Digest, PrehashSignature},
-    elliptic_curve::FieldSize,
+    crate::signature_flow::{digest::Digest, PrehashSignature},
+    elliptic_curve_flow::FieldSize,
 };
 
 #[cfg(any(feature = "arithmetic", feature = "digest"))]
 use crate::{
-    elliptic_curve::{generic_array::ArrayLength, PrimeCurve},
+    elliptic_curve_flow::{generic_array::ArrayLength, PrimeCurve},
     Signature,
 };
 

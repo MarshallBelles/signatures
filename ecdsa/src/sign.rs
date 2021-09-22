@@ -10,7 +10,7 @@ use core::{
     convert::TryFrom,
     fmt::{self, Debug},
 };
-use elliptic_curve::{
+use elliptic_curve_flow::{
     generic_array::ArrayLength,
     group::ff::PrimeField,
     ops::Invert,
@@ -18,17 +18,17 @@ use elliptic_curve::{
     zeroize::Zeroize,
     FieldBytes, FieldSize, NonZeroScalar, PrimeCurve, ProjectiveArithmetic, Scalar, SecretKey,
 };
-use signature::{
+use signature_flow::{
     digest::{BlockInput, Digest, FixedOutput, Reset, Update},
     rand_core::{CryptoRng, RngCore},
     DigestSigner, RandomizedDigestSigner, RandomizedSigner, Signer,
 };
 
 #[cfg(feature = "verify")]
-use {crate::verify::VerifyingKey, elliptic_curve::PublicKey};
+use {crate::verify::VerifyingKey, elliptic_curve_flow::PublicKey};
 
 #[cfg(feature = "pkcs8")]
-use crate::elliptic_curve::{
+use crate::elliptic_curve_flow::{
     consts::U1,
     ops::Add,
     pkcs8::{self, FromPrivateKey},
@@ -41,7 +41,7 @@ use core::str::FromStr;
 
 /// ECDSA signing key. Generic over elliptic curves.
 ///
-/// Requires an [`elliptic_curve::ProjectiveArithmetic`] impl on the curve, and a
+/// Requires an [`elliptic_curve_flow::ProjectiveArithmetic`] impl on the curve, and a
 /// [`SignPrimitive`] impl on its associated `Scalar` type.
 #[derive(Clone)]
 #[cfg_attr(docsrs, doc(cfg(feature = "sign")))]
