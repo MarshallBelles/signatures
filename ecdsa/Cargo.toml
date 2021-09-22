@@ -1,6 +1,6 @@
 [package]
-name    = "ecdsa"
-version = "0.13.0-pre" # Also update html_root_url in lib.rs when bumping this
+name    = "ecdsa_flow"
+version = "1.0.0" # Also update html_root_url in lib.rs when bumping this
 description   = """
 Signature and elliptic curve types providing interoperable support for the
 Elliptic Curve Digital Signature Algorithm (ECDSA)
@@ -14,29 +14,29 @@ categories = ["cryptography", "no-std"]
 keywords   = ["crypto", "ecc", "nist", "secp256k1", "signature"]
 
 [dependencies]
-elliptic-curve = { git = "https://github.com/MarshallBelles/traits.git", default-features = false }
+elliptic-curve-flow = { git = "https://github.com/MarshallBelles/traits.git", default-features = false }
 hmac = { version = "0.11", optional = true, default-features = false }
-signature = { git = "https://github.com/MarshallBelles/traits.git", package="signature", default-features = false, features = ["rand-preview"] }
+signature-flow = { git = "https://github.com/MarshallBelles/traits.git", package="signature-flow", default-features = false, features = ["rand-preview"] }
 
 # optional dependencies
 der = { version = "0.4", optional = true }
 
 [dev-dependencies]
-elliptic-curve = { git = "https://github.com/MarshallBelles/traits.git", default-features = false, features = ["dev"] }
+elliptic-curve-flow = { git = "https://github.com/MarshallBelles/traits.git", default-features = false, features = ["dev"] }
 hex-literal = "0.3"
 sha3 = { version = "0.9", optional = false, default-features = false }
 
 [features]
 default = ["digest"]
 alloc = []
-arithmetic = ["elliptic-curve/arithmetic"]
-dev = ["arithmetic", "digest", "elliptic-curve/dev", "hazmat"]
-digest = ["signature/digest-preview"]
+arithmetic = ["elliptic-curve-flow/arithmetic"]
+dev = ["arithmetic", "digest", "elliptic-curve-flow/dev", "hazmat"]
+digest = ["signature-flow/digest-preview"]
 hazmat = []
-pkcs8 = ["elliptic-curve/pkcs8", "der"]
-pem = ["elliptic-curve/pem", "pkcs8"]
+pkcs8 = ["elliptic-curve-flow/pkcs8", "der"]
+pem = ["elliptic-curve-flow/pem", "pkcs8"]
 sign = ["arithmetic", "digest", "hazmat", "hmac"]
-std = ["alloc", "elliptic-curve/std", "signature/std"]
+std = ["alloc", "elliptic-curve-flow/std", "signature-flow/std"]
 verify = ["arithmetic", "digest", "hazmat"]
 
 [package.metadata.docs.rs]

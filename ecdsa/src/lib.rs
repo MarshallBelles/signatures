@@ -17,11 +17,11 @@
 //! elliptic curve can leverage the types from this crate, along with the
 //! [`k256`], [`p256`], and/or [`p384`] crates to expose ECDSA functionality in
 //! a generic, interoperable way by leveraging the [`Signature`] type with in
-//! conjunction with the [`signature::Signer`] and [`signature::Verifier`]
+//! conjunction with the [`signature_flow::Signer`] and [`signature_flow::Verifier`]
 //! traits.
 //!
-//! For example, the [`ring-compat`] crate implements the [`signature::Signer`]
-//! and [`signature::Verifier`] traits in conjunction with the
+//! For example, the [`ring-compat`] crate implements the [`signature_flow::Signer`]
+//! and [`signature_flow::Verifier`] traits in conjunction with the
 //! [`p256::ecdsa::Signature`] and [`p384::ecdsa::Signature`] types to
 //! wrap the ECDSA implementations from [*ring*] in a generic, interoperable
 //! API.
@@ -78,10 +78,10 @@ mod sign;
 mod verify;
 
 // Re-export the `elliptic-curve` crate (and select types)
-pub use elliptic_curve::{self, sec1::EncodedPoint, PrimeCurve};
+pub use elliptic_curve_flow::{self, sec1::EncodedPoint, PrimeCurve};
 
 // Re-export the `signature` crate (and select types)
-pub use signature::{self, Error, Result};
+pub use signature_flow::{self, Error, Result};
 
 #[cfg(feature = "sign")]
 #[cfg_attr(docsrs, doc(cfg(feature = "sign")))]
@@ -96,14 +96,14 @@ use core::{
     fmt::{self, Debug},
     ops::Add,
 };
-use elliptic_curve::{
+use elliptic_curve_flow::{
     bigint::Encoding as _,
     generic_array::{sequence::Concat, ArrayLength, GenericArray},
     FieldBytes, FieldSize, ScalarCore,
 };
 
 #[cfg(feature = "arithmetic")]
-use elliptic_curve::{group::ff::PrimeField, NonZeroScalar, ProjectiveArithmetic, Scalar};
+use elliptic_curve_flow::{group::ff::PrimeField, NonZeroScalar, ProjectiveArithmetic, Scalar};
 
 /// Size of a fixed sized signature for the given elliptic curve.
 pub type SignatureSize<C> = <FieldSize<C> as Add>::Output;
@@ -217,7 +217,7 @@ where
     }
 }
 
-impl<C> signature::Signature for Signature<C>
+impl<C> signature_flow::Signature for Signature<C>
 where
     C: PrimeCurve,
     SignatureSize<C>: ArrayLength<u8>,
