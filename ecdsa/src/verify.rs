@@ -5,7 +5,7 @@ use crate::{
     Error, Result, Signature, SignatureSize,
 };
 use core::{cmp::Ordering, convert::TryFrom, fmt::Debug, ops::Add};
-use elliptic_curve::{
+use elliptic_curve_flow::{
     consts::U1,
     generic_array::ArrayLength,
     sec1::{
@@ -16,7 +16,7 @@ use elliptic_curve::{
 use signature::{digest::Digest, DigestVerifier, Verifier};
 
 #[cfg(feature = "pkcs8")]
-use crate::elliptic_curve::{
+use crate::elliptic_curve_flow::{
     pkcs8::{self, FromPublicKey},
     AlgorithmParameters,
 };
@@ -26,7 +26,7 @@ use core::str::FromStr;
 
 /// ECDSA verification key (i.e. public key). Generic over elliptic curves.
 ///
-/// Requires an [`elliptic_curve::ProjectiveArithmetic`] impl on the curve, and a
+/// Requires an [`elliptic_curve_flow::ProjectiveArithmetic`] impl on the curve, and a
 /// [`VerifyPrimitive`] impl on its associated `AffinePoint` type.
 #[cfg_attr(docsrs, doc(cfg(feature = "verify")))]
 #[derive(Clone, Debug)]
