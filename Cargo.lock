@@ -155,7 +155,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "ecdsa_flow"
+name = "ecdsa-flow"
 version = "1.0.0"
 dependencies = [
  "der 0.4.3",

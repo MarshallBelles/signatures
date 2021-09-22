@@ -1,5 +1,5 @@
 [package]
-name    = "ecdsa_flow"
+name    = "ecdsa-flow"
 version = "1.0.0" # Also update html_root_url in lib.rs when bumping this
 description   = """
 Signature and elliptic curve types providing interoperable support for the
